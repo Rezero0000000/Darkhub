@@ -1,6 +1,7 @@
 ### Bubble Sort
 
-- Iterasi pertama dimulai dari elemen pertama hingga elemen sebelum terakhir.
+- Mulailah sebuah iterasi untuk semua elemen
+- Iterasi kedua dimulai dari elemen pertama hingga elemen sebelum terakhir.
 - Selama iterasi ini, bandingkan elemen saat ini dengan elemen berikutnya.
 - Jika elemen saat ini lebih besar daripada elemen berikutnya, tukar mereka.
 - Pindah ke elemen berikutnya dan ulangi langkah-langkah 2-3 hingga selesai 
