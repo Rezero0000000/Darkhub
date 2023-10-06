@@ -1,19 +1,10 @@
 ### Bubble Sort
+- Bandingkan dua angka berturut-turut dalam daftar.
+- Jika angka pertama lebih besar daripada yang kedua, tukar posisi mereka.
+- Lanjutkan langkah 1 dan 2 sampai seluruh daftar terurut.Pseudo Code: 
 
-- Mulailah sebuah iterasi untuk semua elemen
-- Iterasi kedua dimulai dari elemen pertama hingga elemen sebelum terakhir.
-- Selama iterasi ini, bandingkan elemen saat ini dengan elemen berikutnya.
-- Jika elemen saat ini lebih besar daripada elemen berikutnya, tukar mereka.
-- Pindah ke elemen berikutnya dan ulangi langkah-langkah 2-3 hingga selesai 
-  iterasi pertama. Setelah iterasi pertama, elemen terbesar akan berada di 
-  posisi terakhir.
-- Lakukan iterasi berikutnya dengan mengabaikan elemen terakhir yang sudah 
-  terurut. Iterasi ini akan memindahkan elemen terbesar kedua ke posisi 
-  sebelum elemen terakhir.
-- Ulangi proses di atas untuk setiap iterasi hingga seluruh daftar sudah 
-  terurut dengan benar.
+Pseudo Code:
 
-Pseudo Code: 
     function bubbleSort(arr) {
         var len = arr.length;
         var swapped;
@@ -30,4 +21,33 @@ Pseudo Code:
             }
         } while (swapped);
         return arr;
+    }
+
+### Selection Sort
+- Cari elemen terkecil dalam array.
+- Tukar elemen terkecil dengan elemen pertama.
+- Cari elemen terkecil dalam sisa array (tanpa elemen pertama).
+- Tukar elemen terkecil ini dengan elemen kedua.
+- Ulangi proses di atas untuk elemen-elemen berikutnya hingga seluruh array 
+  terurut.
+
+Pseudo Code:
+
+    function selectionSort(arr) {
+        n = arr.length;
+
+        for (i = 0; i < n-1; i++) {
+            minIndex = i;
+            for (j = i+1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+        
+            if (minIndex !== i) {
+                var temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+        }
     }
