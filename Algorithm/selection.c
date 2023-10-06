@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void selectionSort (char arr[][100], int n);
+void selectionChar (char arr[][100], int n);
 
 int main () {
   int numbers[9] = {9, 1, 6, 3, 8, 2, 5, 4, 7};
@@ -30,12 +30,12 @@ int main () {
   char strings[][100] = {"Rem", "Haju", "Lain", "Arisu", "Kurumi", "Aruna"};
   int n = sizeof(strings)/sizeof(strings[0]);
  
-  printf("\nBefore: ");
+  printf("\n\nBefore: ");
   for (int i = 0; i < n; i++){
     printf("%s, ", strings[i]);
   } 
 
-  selectionSort (strings, n);
+  selectionChar (strings, n);
 
   printf("\nAfter: ");
   for (int i = 0; i < n; i++){
@@ -45,7 +45,7 @@ int main () {
   return 0;
 }
 
-void selectionSort (char arr[][100], int n) {
+void selectionChar (char arr[][100], int n) {
   char temp[100];
 
   for (int i = 0; i < n - 1; i++) {

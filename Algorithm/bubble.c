@@ -2,11 +2,11 @@
 #include <stdbool.h>
 #include <string.h>
 
-void bubbleSort(char arr[][100], int n) {
+void bubbleChar (char arr[][100], int n) {
     int i, j;
     char temp[100];
 
-    //for (i = 0; i < n-1; i++) {
+    for (i = 0; i < n-1; i++) {
         for (j = 0; j < n-i-1; j++) {
             if (strcmp(arr[j], arr[j+1]) > 0) {
                 strcpy(temp, arr[j]);
@@ -14,7 +14,7 @@ void bubbleSort(char arr[][100], int n) {
                 strcpy(arr[j+1], temp);
             }
         }
-    //}
+    }
 }
 
 int main () {
@@ -23,7 +23,7 @@ int main () {
   
   while (status) { 
     status = false;
-      for (int i = 0; i < sizeof(numbers)/sizeof(numbers[0]) - 1; i++) {
+  for (int i = 0; i < sizeof(numbers)/sizeof(numbers[0]) - 1; i++) {
         if (numbers[i] > numbers[i + 1]){
           int temp = numbers[i];
           numbers[i] = numbers[i + 1]; 
@@ -59,12 +59,12 @@ int main () {
   // for String
   char arr[][100] = {"Schwartz", "Rem", "Nobara", "Haju", "Fubuki"};
   
-  printf("\nBefore: ");
+  printf("\n\nBefore: ");
   for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++){
     printf("%s, ",arr[i]);
   } 
 
-  bubbleSort (arr, sizeof(arr)/sizeof(arr[0]));
+  bubbleChar (arr, sizeof(arr)/sizeof(arr[0]));
 
   printf("\nAfter: ");
   for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++){

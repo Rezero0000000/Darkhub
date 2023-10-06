@@ -34,12 +34,10 @@ int main () {
   }
 
   // For string
-
   char strings[][100] = {"Rem", "Haju", "Lain", "Arisu", "Kurumi", "Aruna"};
   int n = sizeof(strings)/sizeof(strings[0]);
-  printf("\n");
 
-  printf("\nBefore: ");
+  printf("\n\nBefore: ");
   for (int i = 0; i < sizeof(strings)/sizeof(strings[0]); i++){
       printf("%s, ",strings[i]);
   }
