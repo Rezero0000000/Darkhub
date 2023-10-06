@@ -1,4 +1,7 @@
 ### Bubble Sort
+Bubble sort membandingkan dan menukar pasangan elemen yang berdekatan jika mereka tidak dalam
+urutan yang benar. Ini terus berlanjut hingga tidak ada lagi pertukaran yang diperlukan.
+
 - Bandingkan dua angka berturut-turut dalam daftar.
 - Jika angka pertama lebih besar daripada yang kedua, tukar posisi mereka.
 - Lanjutkan langkah 1 dan 2 sampai seluruh daftar terurut.Pseudo Code: 
@@ -24,6 +27,11 @@ Pseudo Code:
     }
 
 ### Selection Sort
+
+Selection sort mencari elemen terkecil dalam daftar dan menukarnya dengan elemen pertama. 
+Kemudian mencari elemen terkecil kedua dalam sisa daftar dan menukarnya dengan elemen kedua, dan s
+eterusnya.
+
 - Cari elemen terkecil dalam array.
 - Tukar elemen terkecil dengan elemen pertama.
 - Cari elemen terkecil dalam sisa array (tanpa elemen pertama).
@@ -51,3 +59,10 @@ Pseudo Code:
             }
         }
     }
+
+### Insertion Sort
+
+Insertion sort membandingkan dan memindahkan elemen satu per satu ke posisi yang benar
+dalam daftar yang sedang diurutkan.
+
+
