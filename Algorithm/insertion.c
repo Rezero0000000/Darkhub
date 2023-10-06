@@ -21,10 +21,8 @@ int main () {
   for (int i = 0; i < sizeof(numbers)/sizeof(numbers[0]); i++) {
     int currentElement = numbers[i];
     int j = i -1;
-    int e = 1;
+
     while (j >= 0 && numbers[j] > currentElement) {
-      printf("%d, ", e);
-      e++;
       numbers[j + 1] = numbers[j];
       j--;
     }
