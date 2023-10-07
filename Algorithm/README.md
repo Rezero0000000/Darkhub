@@ -95,3 +95,34 @@ Pseudo Code:
         return -1; 
     }
 
+### Binary Search
+
+ algoritma pencarian yang digunakan untuk mencari elemen tertentu 
+ dalam sebuah larik atau daftar yang telah diurutkan. Algoritma ini 
+ bekerja dengan membagi-bagi larik menjadi dua bagian dan memeriksa 
+ elemen tengahnya. Berdasarkan perbandingan antara elemen tengah ini 
+ dengan elemen yang dicari, algoritma akan menentukan apakah elemen 
+ yang dicari berada di sebelah kiri atau kanan elemen tengah tersebut. 
+ Proses ini terus berlanjut dengan mengurangi rentang pencarian 
+ menjadi setengahnya pada setiap iterasi, hingga elemen yang dicari 
+ ditemukan atau rentang pencarian telah habis.
+
+Pseudo Code:
+
+    function binarySearch(arr, target) {
+        let left = 0;
+        let right = arr.length - 1;
+
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+
+            if (arr[mid] === target) {
+                return mid; 
+            } else if (arr[mid] < target) {
+                left = mid + 1; 
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1; 
+    }
