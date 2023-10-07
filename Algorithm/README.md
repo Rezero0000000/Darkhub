@@ -1,4 +1,5 @@
 ### Bubble Sort
+
 Bubble sort membandingkan dan menukar pasangan elemen yang berdekatan jika mereka tidak dalam
 urutan yang benar. Ini terus berlanjut hingga tidak ada lagi pertukaran yang diperlukan.
 
@@ -8,22 +9,17 @@ urutan yang benar. Ini terus berlanjut hingga tidak ada lagi pertukaran yang dip
 
 Pseudo Code:
 
-    function bubbleSort(arr) {
-        var len = arr.length;
-        var swapped;
-    
-        do {
-            swapped = false;
-            for (var i = 0; i < len - 1; i++) {
-                if (arr[i] > arr[i + 1]) {
-                 var temp = arr[i];
-                 arr[i] = arr[i + 1];
-                 arr[i + 1] = temp;
-                 swapped = true;
-                }
+    let numbers = [4, 7, 2, 3, 6, 1, 5];
+
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = 0; j < numbers.length - 1; j++) {
+            if (numbers[j] > numbers[j + 1]) {
+                // Tukar elemen jika perlu
+                let temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
             }
-        } while (swapped);
-        return arr;
+        }
     }
 
 ### Selection Sort
@@ -69,18 +65,19 @@ dalam daftar yang sedang diurutkan. dimulai dari elemen ke 2, misal:
 
 Pseudo Code:
 
-        function insertionSort(arr) {
-            for (let i = 1; i < arr.length; i++) {
-                let currentElement = arr[i];
-                let j = i - 1;
-
-                while (j >= 0 && arr[j] > currentElement) {
-                    arr[j + 1] = arr[j];
-                    j--;
-                }
-
-                arr[j + 1] = currentElement;
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i; j > 0; j--) {
+            
+            if (arr[j] < arr[j - 1]) {
+                let temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            } 
+            else {
+                break; 
             }
         }
+    }
+
 
 

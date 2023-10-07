@@ -33,6 +33,28 @@ int main () {
     printf("%d, ", numbers[i]);
   }
 
+  // atau
+  int arr[] = {21, 10, 4, 2, 5, 8, 1};
+  
+  for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++) {
+      for (int j = i; j > 0; j--) {
+          if (arr[j] < arr[j - 1]) {
+                // Tukar elemen jika perlu
+            int temp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = temp;
+          } 
+          else {
+            break;
+          }
+      }
+  }
+  printf("\n");
+
+  for (int i = 0; i < sizeof(numbers)/sizeof(arr[0]); i++) {
+    printf("%d, ", arr[i]);
+  }
+
   // For string
   char strings[][100] = {"Rem", "Haju", "Lain", "Arisu", "Kurumi", "Aruna"};
   int n = sizeof(strings)/sizeof(strings[0]);
