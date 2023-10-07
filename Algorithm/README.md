@@ -80,4 +80,18 @@ Pseudo Code:
     }
 
 
+### Sequental Search (Linear Search)
+
+adalah metode sederhana untuk mencari elemen tertentu dalam array.
+
+Pseudo Code:
+
+    function sequentialSearch(arr, target) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === target) {
+                return i; 
+            }
+        }
+        return -1; 
+    }
 
