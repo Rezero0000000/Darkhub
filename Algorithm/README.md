@@ -178,7 +178,8 @@ Pertama, kita akan membagi array ini menjadi dua bagian seimbang:
 [38, 27, 43, 3]    [9, 82, 10]
 ```
 
-Kemudian, kita akan terus membagi masing-masing subarray hingga hanya tersisa satu elemen dalam setiap subarray:
+Kemudian, kita akan terus membagi masing-masing subarray hingga hanya 
+tersisa satu elemen dalam setiap subarray:
 
 ```
 [38]  [27]  [43]  [3]    [9]  [82]  [10]
@@ -192,7 +193,8 @@ Selanjutnya, kita akan mengurutkan masing-masing subarray secara terpisah:
 ```
 
 Langkah 3: Penggabungan (Merge)
-Sekarang, kita akan menggabungkan kembali subarray-subarray ini sambil mempertahankan urutan yang benar:
+Sekarang, kita akan menggabungkan kembali subarray-subarray ini sambil 
+mempertahankan urutan yang benar:
 
 1. Gabung [27, 38] dan [3, 43]:
 ```
@@ -204,7 +206,8 @@ Sekarang, kita akan menggabungkan kembali subarray-subarray ini sambil mempertah
 [3, 9, 10, 27, 38, 43, 82]
 ```
 
-Sekarang, array ini sudah terurut secara ascending, dan proses merge sort selesai. Array yang diurutkan adalah:
+Sekarang, array ini sudah terurut secara ascending, 
+dan proses merge sort selesai. Array yang diurutkan adalah:
 
 ```
 [3, 9, 10, 27, 38, 43, 82]
@@ -240,4 +243,162 @@ Pseudo Code:
         const right = arr.slice(middle);
 
         return merge(mergeSort(left), mergeSort(right));
+    }
+
+## Quick Sort
+
+Algoritma ini juga termasuk dalam kategori algoritma "divide and conquer,"
+seperti merge sort. Ia bekerja dengan cara membagi array atau daftar yang 
+akan diurutkan menjadi dua bagian, mengurutkan masing-masing bagian
+tersebut, dan kemudian menggabungkannya kembali. Namun, yang membedakan 
+quick sort adalah pendekatan yang digunakan untuk pembagian dan 
+penggabungan, yang lebih cepat daripada merge sort dalam beberapa kasus.
+
+langkah-langkah:
+
+1. **Pivot Selection (Pemilihan Pivot)**:
+   - Algoritma quick sort memilih elemen tertentu sebagai "pivot." 
+   Pemilihan pivot dapat dilakukan dengan berbagai cara, tetapi 
+   salah satu pendekatan umum adalah memilih elemen tengah dari array 
+   atau daftar yang akan diurutkan.
+
+2. **Partisi (Partitioning)**:
+   - Setelah pivot dipilih, array dibagi menjadi dua bagian: bagian
+   sebelah kiri pivot yang berisi elemen-elemen yang kurang dari atau
+   sama dengan pivot, dan bagian sebelah kanan pivot yang berisi
+   elemen-elemen yang lebih besar dari pivot.
+
+   - Tujuan dari langkah ini adalah memindahkan pivot ke posisi yang tepat 
+   sehingga elemen-elemen di sebelah kirinya lebih kecil daripada pivot, dan
+   elemen-elemen di sebelah kanannya lebih besar daripada pivot.
+
+3. **Rekursi (Recursion)**:
+   - Setelah pembagian, algoritma quick sort diterapkan secara rekursif
+   pada kedua bagian yang terpisah tersebut. Artinya, langkah-langkah di atas
+   diulang pada kedua subarray tersebut secara terpisah.
+
+4. **Penggabungan (Combination)**:
+   - Setelah kedua subarray terpisah diurutkan, mereka digabungkan
+   kembali untuk menghasilkan array yang sudah terurut secara keseluruhan.
+   
+Algoritma ini terus membagi dan mengurutkan subarray hingga seluruh array
+terurut. Perlu diperhatikan bahwa pemilihan pivot yang baik adalah kunci
+untuk kinerja optimal dari quick sort. Jika pivot yang dipilih selalu merupakan
+elemen terkecil atau terbesar, algoritma dapat memiliki kinerja terburuk, O(n^2).
+Namun, jika pivot dipilih secara acak atau dengan strategi yang cerdas, quick sort
+dapat mencapai kompleksitas waktu rata-rata O(n log n), yang membuatnya 
+sangat efisien untuk mengurutkan array besar.
+
+Cara memilih pivot:
+
+1. **Pivot Tengah**: Pivot dipilih sebagai elemen tengah dari array. 
+Ini sering digunakan sebagai pilihan default dan sering berfungsi baik dalam kasus umum.
+
+2. **Pivot Acak**: Pivot dipilih secara acak dari array. Ini mengurangi 
+kemungkinan terjadinya kasus terburuk dan umumnya menghasilkan kinerja
+yang baik secara rata-rata.
+
+3. **Pivot Median-of-Three**: Dalam strategi ini, kita memilih
+tiga elemen (biasanya elemen pertama, tengah, dan terakhir) dari array,
+dan kemudian kita pilih median dari ketiga elemen tersebut sebagai pivot.
+Ini dapat mengurangi kemungkinan terjadinya kasus terburuk dan memberikan
+kinerja yang baik dalam banyak situasi.
+
+4. **Pivot Pemilihan Khusus (Misalnya, Pivoting of Medians)**: Ini adalah
+pendekatan yang lebih canggih di mana kita melakukan pemilihan pivot berdasarkan
+analisis statistik yang lebih mendalam dari array. Pendekatan seperti ini
+lebih kompleks tetapi dapat memberikan hasil yang baik dalam kasus-kasus yang sulit.
+
+Simulasi :
+
+Mari kita simulasikan quick sort dengan contoh sederhana menggunakan array berikut:
+
+```
+[38, 27, 43, 3, 9, 82, 10]
+```
+
+Langkah 1: Pivot Selection (Pemilihan Pivot)
+Kita akan memilih pivot dari array. Dalam contoh ini, kita akan memilih pivot pertama, 
+yaitu `38`.
+
+Langkah 2: Partisi (Partitioning)
+Kita akan membagi array menjadi dua bagian: bagian sebelah kiri pivot yang berisi 
+elemen-elemen yang lebih kecil daripada pivot, dan bagian sebelah kanan pivot yang
+berisi elemen-elemen yang lebih besar daripada pivot.
+
+```
+[27, 3, 9, 10]    [38]    [43, 82]
+```
+
+Pivot `38` telah berada di posisi yang benar di antara bagian kiri dan kanan. 
+Bagian kiri hanya berisi elemen yang lebih kecil daripada pivot, dan bagian 
+kanan hanya berisi elemen yang lebih besar.
+
+Langkah 3: Rekursi (Recursion)
+Kita akan menerapkan quick sort secara rekursif pada kedua subarray yang 
+terpisah (bagian kiri dan kanan).
+
+Pada bagian kiri `[27, 3, 9, 10]`:
+- Pivot: `27`
+- Partisi:
+  ```
+  [3, 9, 10]    [27]
+  ```
+
+Kita akan menerapkan quick sort pada kedua subarray tersebut, tetapi dalam 
+contoh ini, mereka sudah terurut.
+
+Pada bagian kanan `[43, 82]`:
+- Pivot: `43`
+- Partisi:
+  ```
+  [43]    [82]
+  ```
+
+Kedua subarray tersebut juga sudah terurut.
+
+Langkah 4: Penggabungan (Combination)
+Terakhir, kita akan menggabungkan kembali subarray-subarray yang sudah 
+terurut menjadi satu array terurut.
+
+```
+[3, 9, 10, 27, 38, 43, 82]
+```
+
+Sekarang, array ini sudah terurut secara ascending, dan proses quick sort selesai.
+
+Demikianlah contoh simulasi singkat dari quick sort. Algoritma ini akan bekerja 
+dengan cara yang serupa untuk array yang lebih besar dan lebih kompleks, dengan 
+pemilihan pivot yang sesuai untuk setiap situasi.
+
+Pseudo Code:
+
+    function partition(arr, low, high) {
+        const pivot = arr[high];
+        let i = low - 1;
+
+        for (let j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                // Tukar elemen ke-i dan ke-j
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // Tukar pivot dengan elemen ke-(i+1)
+         [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+        
+        return i + 1;
+        
+    }
+
+    function quickSort(arr, low, high) {
+        if (low < high) {
+            // Temukan pivot yang benar dan lakukan partisi
+            const pivotIndex = partition(arr, low, high);
+
+            // Rekursi pada dua subarray
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
     }
