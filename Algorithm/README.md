@@ -1,4 +1,4 @@
-### Bubble Sort
+## Bubble Sort
 
 Bubble sort membandingkan dan menukar pasangan elemen yang berdekatan jika mereka tidak dalam
 urutan yang benar. Ini terus berlanjut hingga tidak ada lagi pertukaran yang diperlukan.
@@ -22,7 +22,7 @@ Pseudo Code:
         }
     }
 
-### Selection Sort
+## Selection Sort
 
 Selection sort mencari elemen terkecil dalam daftar dan menukarnya dengan elemen pertama. 
 Kemudian mencari elemen terkecil kedua dalam sisa daftar dan menukarnya dengan elemen kedua, dan s
@@ -56,7 +56,7 @@ Pseudo Code:
         }
     }
 
-### Insertion Sort
+## Insertion Sort
 
 Insertion sort membandingkan dan memindahkan elemen satu per satu ke posisi yang benar
 dalam daftar yang sedang diurutkan. dimulai dari elemen ke 2, misal:
@@ -80,7 +80,7 @@ Pseudo Code:
     }
 
 
-### Sequental Search (Linear Search)
+## Sequental Search (Linear Search)
 
 adalah metode sederhana untuk mencari elemen tertentu dalam array.
 
@@ -95,7 +95,7 @@ Pseudo Code:
         return -1; 
     }
 
-### Binary Search
+## Binary Search
 
  algoritma pencarian yang digunakan untuk mencari elemen tertentu 
  dalam sebuah larik atau daftar yang telah diurutkan. Algoritma ini 
@@ -127,7 +127,7 @@ Pseudo Code:
         return -1; 
     }
 
-### Merge Sort 
+## Merge Sort 
 
 Merge sort adalah salah satu algoritma pengurutan (sorting algorithm) yang digunakan untuk 
 mengurutkan sejumlah besar data. Algoritma ini termasuk dalam kategori algoritma pengurutan b
@@ -211,7 +211,6 @@ Sekarang, array ini sudah terurut secara ascending, dan proses merge sort selesa
 ```
 
 Pseudo Code: 
-    
     
     function merge(left, right) {
         let result = [];
