@@ -126,3 +126,119 @@ Pseudo Code:
         }
         return -1; 
     }
+
+### Merge Sort 
+
+Merge sort adalah salah satu algoritma pengurutan (sorting algorithm) yang digunakan untuk 
+mengurutkan sejumlah besar data. Algoritma ini termasuk dalam kategori algoritma pengurutan b
+erdasarkan pemisahan (divide and conquer), yang berarti ia memecah masalah pengurutan menjadi 
+beberapa submasalah yang lebih kecil, mengurutkan submasalah tersebut, dan kemudian 
+menggabungkannya kembali menjadi solusi utuh.
+
+Berikut adalah langkah-langkah utama dalam cara kerja merge sort:
+
+1. **Pembagian (Divide)**:
+   - Langkah pertama dalam merge sort adalah membagi array atau daftar yang akan 
+   diurutkan menjadi dua bagian seimbang. Proses ini dilakukan secara rekursif hingga 
+   setiap bagian hanya berisi satu elemen atau tidak bisa dibagi lebih lanjut.
+
+2. **Pengurutan (Conquer)**:
+   - Setelah array dibagi menjadi bagian-bagian yang lebih kecil, langkah selanjutnya 
+   adalah mengurutkan masing-masing bagian tersebut. Ini bisa dilakukan dengan menggunakan 
+   rekursi untuk mengurutkan setiap subarray.
+
+3. **Penggabungan (Merge)**:
+   - Tahap terakhir adalah menggabungkan kembali bagian-bagian yang sudah diurutkan 
+   menjadi satu array besar yang terurut. Pada tahap ini, elemen-elemen dari dua bagian 
+   yang berdekatan digabungkan menjadi satu bagian yang lebih besar dan diurutkan 
+   secara bersamaan.
+
+Proses penggabungan adalah inti dari algoritma merge sort. Selama proses 
+penggabungan, dua bagian yang diurutkan dibandingkan satu sama lain, dan elemen-elemen 
+dari keduanya diambil secara berurutan dengan mempertahankan urutan yang benar. Proses ini 
+terus berlanjut hingga semua elemen digabungkan menjadi satu array terurut.
+
+Keunggulan utama dari merge sort adalah bahwa ia memiliki kompleksitas waktu 
+yang konstan, yaitu O(n log n), di mana n adalah jumlah elemen dalam array. 
+Ini membuatnya efisien untuk mengurutkan daftar besar. Namun, salah satu kelemahannya 
+adalah bahwa ia membutuhkan alokasi memori tambahan untuk menyimpan subarray sementara 
+selama proses pembagian dan penggabungan, yang dapat membuatnya kurang efisien dalam hal 
+penggunaan memori dibandingkan dengan beberapa algoritma pengurutan lainnya.
+
+Example :
+
+```
+[38, 27, 43, 3, 9, 82, 10]
+```
+
+Langkah 1: Pembagian (Divide)
+Pertama, kita akan membagi array ini menjadi dua bagian seimbang:
+
+```
+[38, 27, 43, 3]    [9, 82, 10]
+```
+
+Kemudian, kita akan terus membagi masing-masing subarray hingga hanya tersisa satu elemen dalam setiap subarray:
+
+```
+[38]  [27]  [43]  [3]    [9]  [82]  [10]
+```
+
+Langkah 2: Pengurutan (Conquer)
+Selanjutnya, kita akan mengurutkan masing-masing subarray secara terpisah:
+
+```
+[27, 38]  [3, 43]    [9, 10, 82]
+```
+
+Langkah 3: Penggabungan (Merge)
+Sekarang, kita akan menggabungkan kembali subarray-subarray ini sambil mempertahankan urutan yang benar:
+
+1. Gabung [27, 38] dan [3, 43]:
+```
+[3, 27, 38, 43]
+```
+
+2. Gabung hasil gabungan sebelumnya dengan [9, 10, 82]:
+```
+[3, 9, 10, 27, 38, 43, 82]
+```
+
+Sekarang, array ini sudah terurut secara ascending, dan proses merge sort selesai. Array yang diurutkan adalah:
+
+```
+[3, 9, 10, 27, 38, 43, 82]
+```
+
+Pseudo Code: 
+    
+    
+    function merge(left, right) {
+        let result = [];
+        let leftIndex = 0;
+        let rightIndex = 0;
+
+    while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        } else {
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+
+        return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    }
+
+    function mergeSort(arr) {
+        if (arr.length <= 1) {
+            return arr; // Array yang sudah terurut jika hanya berisi satu elemen atau kosong
+        }
+
+        const middle = Math.floor(arr.length / 2);
+        const left = arr.slice(0, middle);
+        const right = arr.slice(middle);
+
+        return merge(mergeSort(left), mergeSort(right));
+    }
