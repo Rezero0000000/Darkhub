@@ -11,68 +11,101 @@ nilai hash MD5 yang sama
 
 ### HTTP Header List 
 
-- User-Agent: Header ini mengidentifikasi agen pengguna (seperti browser 
-atau alat HTTP) yang membuat permintaan. Anda dapat mengubahnya untuk 
-menyamar sebagai jenis agen pengguna yang berbeda.
+1. **User-Agent:** Identifikasi browser atau agen pengguna.
 
-- Host: Menunjukkan nama host dari URL yang diminta. Biasanya, ini 
-diatur secara otomatis oleh klien HTTP, tetapi dalam beberapa situasi, 
-Anda mungkin perlu mengubahnya.
+2. **Host:** Nama host dari URL permintaan.
 
-- Cookie: Header ini digunakan untuk mengirim cookie ke server. 
-Dalam beberapa tantangan CTF, Anda mungkin perlu mengirim cookie 
-khusus untuk mendapatkan akses atau izin tertentu.
+3. **Cookie:** Untuk mengirim informasi cookie.
 
-- Referer: Header ini mengidentifikasi URL yang mengarahkan pengguna 
-ke halaman saat ini. Terkadang, Anda harus mengatur Referer 
-untuk mengeksploitasi kerentanan tertentu.
+4. **Content-Type:** Menentukan jenis konten yang dikirim oleh klien.
 
-- Authorization: Digunakan untuk mengirim informasi otorisasi, 
-seperti token atau kredensial. Dalam beberapa kasus, Anda mungkin 
-harus menggunakan header ini untuk mengakses sumber daya yang 
-dilindungi kata sandi.
+5. **Connection:** Mengontrol koneksi HTTP, seperti "keep-alive."
 
-- Content-Type: Header ini digunakan untuk menentukan jenis media 
-konten yang dikirim dalam permintaan. Ini dapat berguna saat Anda 
-mengirimkan data dalam permintaan POST.
+6. **Accept-Language:** Menentukan bahasa yang diinginkan oleh klien.
 
-- Accept: Header ini menentukan jenis media konten yang dapat 
-diterima oleh klien. Ini bisa penting saat mencoba mengelabui 
-server atau mencoba mengakses konten tertentu.
+7. **X-Forwarded-For:** Mengidentifikasi alamat IP asli pengguna ketika melalui proxy atau CDN.
 
-- Connection: Header ini mengontrol koneksi HTTP, seperti "keep-alive" 
-untuk menjaga koneksi terbuka.
+8. **Content-Length:** Menyatakan panjang isi dalam byte.
 
-- Accept-Language: Menentukan bahasa yang diinginkan oleh klien. 
-Anda dapat mengubahnya untuk menguji apakah server merespons dengan 
-bahasa tertentu atau tidak.
+9. **Location:** Mengarahkan klien ke URL lain.
 
-- Host: Header Host berisi nama host dari URL yang diminta. 
-Anda dapat memodifikasinya jika Anda perlu mengarahkan permintaan 
-ke host yang berbeda.
+10. **Proxy-Authorization:** Digunakan untuk mengirim otorisasi kepada proxy.
 
-- X-Forwarded-For: Header ini mengidentifikasi alamat IP asli 
-pengguna ketika melalui proxy atau CDN. Dalam beberapa kasus, 
-Anda dapat mencoba menyusupi header ini.
+### Shell Exec
+`shell_exec` adalah salah satu fungsi dalam bahasa pemrograman PHP yang digunakan
+untuk menjalankan perintah di lingkungan shell atau terminal sistem operasi. 
 
-- X-Frame-Options: Header ini digunakan untuk mengendalikan bagaimana 
-halaman dapat dimuat dalam iframe. Anda mungkin perlu memeriksa 
-atau mengatur header ini dalam tantangan CTF yang 
-melibatkan Clickjacking.
+Contoh penggunaan `shell_exec` dalam PHP:
 
-- Content-Length: Header ini menyatakan panjang isi dalam byte. 
-Dalam situasi tertentu, Anda perlu memodifikasinya jika mencoba 
-mengeksploitasi kerentanan terkait dengan ukuran isi.
+```php
+// Menjalankan perintah "ls" di terminal dan mendapatkan outputnya
+$output = shell_exec("ls");
 
-- Cache-Control: Header ini mengontrol cara data disimpan dalam cache. 
-Kadang-kadang, Anda mungkin perlu memanipulasi header ini untuk 
-menghindari caching atau memaksa caching.
+// Menampilkan output dari perintah "ls"
+echo $output;
+```
 
-- Location: Header ini mengarahkan klien ke URL lain. 
-Anda mungkin harus mengikuti URL yang diarahkan dalam 
-tantangan tertentu.
+### Path Transerval
 
-- Proxy-Authorization: Header ini digunakan 
-untuk mengirim otorisasi kepada proxy.
+Path traversal, juga dikenal sebagai directory traversal atau dot dot slash (..) attack, 
+adalah jenis serangan keamanan komputer yang terjadi ketika seorang penyerang mencoba
+mengakses file atau direktori di luar batasan yang seharusnya diizinkan oleh aplikasi
+web atau perangkat lunak tertentu. Serangan ini biasanya dilakukan dengan memanfaatkan
+celah keamanan yang ada dalam aplikasi web yang tidak memvalidasi dengan benar input
+dari pengguna.
 
-###
+Cara kerja serangan path traversal adalah dengan mencoba mengganti atau memanipulasi
+path file atau direktori yang diminta oleh aplikasi sehingga penyerang dapat mengakses
+file atau direktori yang seharusnya tidak dapat diakses olehnya. Ini dapat menyebabkan
+kebocoran informasi sensitif atau bahkan memungkinkan penyerang untuk mengunggah file
+berbahaya ke server.
+
+Contoh sederhana serangan path traversal adalah ketika seorang penyerang mencoba
+mengakses file berikut melalui URL:
+
+```
+https://example.com/viewfile.php?file=../../../../../etc/passwd
+```
+
+Dalam contoh ini, penyerang mencoba naik beberapa tingkat direktori
+(ditunjukkan oleh `../../`) untuk mengakses file `/etc/passwd` yang seharusnya
+tidak dapat diakses oleh pengguna biasa. Jika aplikasi web tidak memvalidasi
+input dengan benar, serangan ini dapat berhasil.
+
+Untuk melindungi aplikasi web dari serangan path traversal, sangat penting
+untuk memvalidasi input pengguna dengan cermat, membatasi akses ke file dan
+direktori, dan mengimplementasikan kontrol akses yang kuat. Selain itu, penggunaan
+mekanisme keamanan seperti Web Application Firewall (WAF) juga dapat membantu
+mengidentifikasi dan mencegah serangan path traversal.
+
+
+### Remote Code Execution (RCE)
+
+**Remote Code Execution (RCE)** adalah serangan keamanan yang memungkinkan seorang
+penyerang untuk menjalankan kode atau perintah pada sistem yang diserang dari jarak jauh.
+Serangan ini terjadi ketika penyerang berhasil memanfaatkan kerentanan atau celah
+keamanan dalam suatu perangkat lunak atau sistem untuk memasukkan kode berbahaya
+dan menjalankannya.
+
+Cara kerja serangan RCE adalah sebagai berikut:
+
+1. **Identifikasi Kerentanan**: Penyerang mencari kerentanan atau celah keamanan
+dalam perangkat lunak atau sistem yang menjadi target. Kerentanan ini bisa berupa
+bug perangkat lunak, celah keamanan yang tidak diperbaiki, atau masalah dalam
+konfigurasi yang buruk.
+
+2. **Eksploitasi**: Setelah menemukan kerentanan, penyerang akan mencoba
+memanfaatkannya dengan cara mengirimkan input yang dirancang khusus untuk
+mengeksploitasi kerentanan tersebut. Input ini mungkin berisi kode berbahaya
+yang ingin dijalankan oleh penyerang.
+
+3. **Eksekusi Kode**: Jika eksploitasi berhasil, perangkat lunak atau sistem yang
+diserang akan menjalankan kode berbahaya yang dimasukkan oleh penyerang. Kode ini
+dapat digunakan untuk berbagai tujuan, seperti mengambil alih kendali sistem, mencuri
+data sensitif, atau melakukan tindakan merusak lainnya.
+
+4. **Kendali Jarak Jauh**: Yang membuat RCE berbeda dari serangan lain
+adalah bahwa penyerang dapat menjalankan kode ini dari jarak jauh, biasanya
+melalui jaringan atau internet. Ini berarti penyerang tidak perlu memiliki
+akses fisik ke sistem yang diserang, yang dapat membuat serangan ini lebih berbahaya.
+
