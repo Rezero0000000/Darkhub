@@ -1,0 +1,397 @@
+# Query
+
+1. SHOW DATABASES;
+
+2. CREATE DATABASE learn_sql;
+
+3. USE learn_sql;
+
+4. SHOW ENGINES;
+
+5. CREATE TABLE games (
+	id	INT NOT NULL,
+	title	VARCHAR(100) NOT NULL,
+	price	INT(50),
+	stock	INT(100)
+   ) ENGINE=InnoDB;
+
+6. ALTER TABLE table_name
+	action
+
+   example:
+
+   - ALTER TABLE games
+	 ADD COLUMN description VARCHAR(100);
+   - ALTER TABLE games
+	 DROP COLUMN description;
+   - ALTER TABLE games
+	 MODIFY title VARCHAR(200) AFTER/FIRST price;
+   - ALTER TABLE games
+	 MODIFY id INT NOT NULL;
+
+7. Default Value
+	CREATE TABLE games (
+		id	INT NOT NULL,
+		title	VARCHAR(100) NOT NULL,
+		price	INT(50) NOT NULL DEFAULT 0,
+		stock	INT(100)	NOT NULL DEFAULT 0
+  	 ) ENGINE=InnoDB;
+	
+	or
+	
+	ALTER TABLE games
+	 	MODIFY price INT(50) NOT NULL DEFAULT 0;
+
+	other example:
+
+	ALTER TABLE games:
+		ADD COLUMN relase_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+8. Insert data :
+			INSERT INTO games (id, name) VALUES (1, "Counter Strike");
+			SELECT * FROM games;	// cek data
+
+9. Recreate table :
+	TRUNCATE games;
+
+10. Delete table permanent :
+	DROP TABLE games;
+
+10. get last id (only for auto increment):
+	SELECT LAST_INSERT_ID();
+
+
+========================================================================================================================================
+
+
+# Data Type
+
+A. Integer
+|
+|
+NO	Type		Bytes		Minimum Value		Maximum Value
+
+1.	TINYINT		1		-128			127
+2.	SMALLINT	2		-32768			32767
+3.	MEDIUMINT	3		-9396608		8388607
+4. 	INT		4		-2147483648		2147483647
+5.	BIGINT 		8		-9223372036854775808	9223372036854775807
+
+
+B. Floating Point
+|
+|
+NO	Type		Bytes		Minimum Value		Maximum Value
+
+1.	FLOAT		4		-3.402823466E-38	3.402823466E+38
+2. 	DOUBLE		8		-1.7976931348623	-2.225073850720
+					14E-308
+
+C. DECIMAL
+|
+|
+NO	DECIMAL		Min		Max
+1.	DECIMAL(5,2)	-999.99		999.99
+2.	DECIMAL(5,0)	-99999		99999
+3.	DECIMAL(3,1)	-99.9		999
+4.	DECIMAL(3)	-999		999
+
+
+[ NUMBER ATTRIBUTE ]
+|
+|
+NO	Types		Description
+1.	TYPE(N)		Where N is an integer and display width of the type is
+			upto N digits. Example: INT(5)
+
+2.	ZEROFILL	The default padding of spaces is replaced with zeros. So,
+			for a column INT(3) ZEROFILL, 7 is displayed as 007
+
+D. CHAR and VARCHAR
+	- CHAR(10) or VARCHAR(10) artinya tipe data string dengan karakternya 10
+	- Maksimum ukuran nya yaitu 65535 karakter
+	- Perbedaan:
+
+	Value	      Char(4)      Storage      Varchar(4)	Storage
+
+	''	      	  '    '	   4 bytes	''		1 byte
+	'ab'	      'ab  '	   4 bytes	'ab'		3 bytes
+	'abcd'	      'abcd'	   4 bytes	'abcd'		5 bytes
+	'abcdefgh'    'abcd'	   4 bytes	'abcd'		5 bytes
+
+E. TEXT
+	- Text sudah memiliki maksimum panjangnya jadi tidak bisa ditentukan
+	- 4 Jenis data TEXT:
+		- TINYTEXT max 255 karakter (~256 bytes)
+		- TEXT max 65535 karakter (~64 kb)
+		- MEDIUMTEXT max 16777215 karakter (~16MB)
+		- LONGTEXT max 4294967295 karakter (~4GB)
+
+F. ENUM
+	- ENUM tipe data string yang valuenya static
+	- contoh :
+		ENUM("Wibu","Normies") hanya bisa menerima data Wibu dan Normies
+
+G. Date and Time
+|
+|
+No		Type		Format				Exampple
+1.		DATE		YYYY-MM-DD			2020-10-10
+2.		DATETIME	YYYY-MM-DD HH:MM::SS		2020-10-10 10:10:10
+3.		TIMESTAMP	YYYY-MM-DD HH:MM:SS		2020-10-10 10:10:10
+4.		TIME		HH:MM:SS			10:10:10
+5.		YEAR		YYYY				2020
+
+
+========================================================================================================================================
+
+
+# Study case
+
+CREATE TABLE games (
+	id			 	VARCHAR(10)   NOT NULL,
+	title		 	VARCHAR(100)  NOT NULL,
+	description  	TEXT,
+	price			INT UNSIGNED  NOT NULL,
+	quantity 		INT UNSIGNED  NOT NULL DEFAULT 0,
+	created_at  	TIMESTAMP 	  NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+1. Insert single data
+
+	INSERT INTO games (id, title, price, quantity)
+	VALUES ("P0001", "Counter Strike", 15000, 100);
+
+	INSERT INTO games (id, title, description, price, quantity)
+	VALUES ("P0002", "Omori", "Games for kids", 15000, 100);
+
+2. Insert some data
+	INSERT INTO games (id, title, price, quantity)
+	VALUES ("P0003", "Counter Strike", 25000, 100),
+		   ("P0004", "minecraft", 25000, 100),
+		   ("P0005", "Terraria", 15000, 100);
+
+3. Select Data 
+	- SELECT * FROM games;
+	- SELECT id, title, description, price FROM games;
+	- SELECT title, price, quantity, id FROM games;
+
+4. Primary Key
+	- Primary key adalah sebuah kolom yang kita tunjuk sebagai id dari
+	  tabel tersebut
+	- Primary key adalah identitas untuk setiap baris data di dalam table
+	- Primary key harus unik, tidak boleh ada data dengan primary key
+	  yang sama
+	- Kita bisa menunjuk kolom yang akan kita jadikan primary key
+	- Example:
+			CREATE TABLE games (
+				id			 	VARCHAR(10)   NOT NULL,
+				title		 	VARCHAR(100)  NOT NULL,
+				description  	TEXT,
+				price			INT UNSIGNED  NOT NULL,
+				quantity 		INT UNSIGNED  NOT NULL DEFAULT 0,
+				created_at  	TIMESTAMP 	  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (id)
+			) ENGINE=InnoDB;
+
+			or 
+
+			ALTER TABLE games
+				ADD PRIMARY KEY (id);
+5. Update data
+
+	// add category column
+	ALTER TABLE games
+		ADD COLUMN category ENUM ("Adventure", "RPG", "Other")
+			AFTER title;
+
+	// update games column
+	UPDATE games
+	SET category = "Adventure",
+	WHERE id = "P0005";
+
+	// Update some data
+	UPDATE games
+	SET category = "Adventure",
+		description = "This's a fun game :v"
+	WHERE id = "P0004";
+
+6. Delete Data
+	DELETE FROM games
+	WHERE id = ""
+
+7. alias
+
+// column
+	SELECT 	
+		id				AS		kode,
+		title 			AS 		"judul game",
+		description 	AS		deskripsi,
+		price 			AS 		harga,
+		quantity 		AS		jumlah
+	FROM games;
+
+// default
+	SELECT 	
+		games.id				AS		kode,
+		games.title 			AS 		"judul game",
+		games.description 		AS		deskripsi,
+		games.price 			AS 		harga,
+		games.quantity 			AS		jumlah
+	FROM games;
+
+// table
+		SELECT 	
+		produk.id				AS		kode,
+		produk.title 			AS 		"judul game",
+		produk.description 		AS		deskripsi,
+		produk.price 			AS 		harga,
+		produk.quantity 			AS		jumlah
+	FROM games AS produk;
+
+========================================================================================================================================
+
+#Where Operator
+
+1. Operator perbandingan:
+						- =
+						- <> or !=
+						- <
+						- <=
+						- >
+						- >=
+	example:
+			SELECT * FROM games WHERE quantity > 100; 
+			
+2. AND & OR:
+
+A. And
+	Hasil_1		Operator		Hasil_2		Hasil_1
+	True		AND				True		True
+	False		AND				True		False
+	True		AND				False		False
+	False		AND				False		False
+
+	example :
+			SELECR * FROM games WHERE quantity > 100 AND price > 200000;
+
+B. Or
+		Hasil_1		Operator		Hasil_2		Hasil_1
+		True		AND				True		True
+		False		AND				True		True
+		True		AND				False		False
+		False		AND				False		False
+
+example : 
+			SELECR * FROM games WHERE quantity > 100 OR price > 200000;
+
+C. Prioritas dengan kurung ()
+   kalau g make kurung yang di prioritaskan AND dulu
+
+			SELECR * FROM games WHERE (category="adventure" OR quantity > 100)
+			AND price > 200000;
+
+3. LIKE Operator	
+	- operator untuk mencari sebagian data di dalam string
+	- lambat jika datanya banyak
+	- tidak case sensitive 
+
+	LIKE Operator 								Hasil
+
+	LIKE 'b%'									String dengan awalan b
+	LIKE "%a"									String dengan akhiran b
+	LIKE "%rem%"								String berisi rem
+	NOT LIKE									tidak LIKE
+
+	example:
+	SELECT * FROM games WHERE title LIKE "minecraft";
+
+4. Between Operator:
+	SELECT * FROM games 
+	WHERE price BETWEEN 10000 AND 20000;
+		
+4. IN Operator:
+	SELECT * FROM games 
+	WHERE category IN/ NOT IN ("Adventure", "RPG");
+
+5. Order By Clause
+	- Untuk mengurutkan data 
+	- Mengurutkandata berdasarkan kolom yang dipilih dan jenis urutan (ASC[Kecil kebesar] atau DESC[Besar kekecil])	
+	- Kita juga bisa mengurutkan tidak hanya terhadap satu kolom tapi beberapa kolom	
+
+	example:
+		SELECT * FROM games
+		ORDER BY price ASC;
+
+		or
+
+		SELECT * FROM games
+		ORDER BY price ASC, id DESC;
+
+6. Limit Clause:
+	- Membatasi 
+			SELECt * FROM games
+			ORDER BY id
+			LIMIT 5;
+
+	- Skip (kaya paginage)
+			SELECt * FROM games
+			ORDER BY id
+			LIMIT 5,5;
+
+7. Delete duplicate data:
+	SELECT DISTINCT category FROM games; 
+
+========================================================================================================================================
+
+# Numeric Function
+
+A. Arithmetic Ooperator
+	- %, MOD
+	- *
+	- +
+	-	-
+	-	-n
+	- /
+	- DIV (pembagiuan terus dibulatkan)
+
+	example:
+		SELECT 
+			id,
+			name,
+			price,
+			price DIV 1000 AS "price in k"
+		FROM games;
+
+========================================================================================================================================
+
+# Auto Increment
+
+CREATE TABLE games (
+	id			 	VARCHAR(10)   NOT NULL AUTO_INCREMENT,
+	title		 	VARCHAR(100)  NOT NULL,
+	description  	TEXT,
+	price			INT UNSIGNED  NOT NULL,
+	quantity 		INT UNSIGNED  NOT NULL DEFAULT 0,
+	created_at  	TIMESTAMP 	  NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+========================================================================================================================================
+
+#Aggreagate Function
+
+SELECT COUNT(id) AS FROM 'total produk' FROM games;
+SELECT AVG(price) AS FROM 'rata rata' FROM games;
+SELECT MAX(price) AS FROM 'harga termahal' FROM games;
+SELECT MIN(price) AS FROM 'harga termurah' FROM games;
+
+
+# GROUP BY Clause (Only for Aggreagate Function)
+SELECT  category,
+		COUNT(id) 
+AS FROM 'total produk' FROM games
+GROUP BY category;
+
+========================================================================================================================================
+
+# Index
