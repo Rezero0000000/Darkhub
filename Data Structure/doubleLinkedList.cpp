@@ -9,19 +9,35 @@
 
 
 void createSingleNode (std::string);
-void createFristNode (std::string);
+void createFirstNode (std::string);
+void createLastNode (std::string);
+
+void deleteFirstNode ();
+void deleteLastNode ();
 
 void printAllNode ();
 
 Node *head, *tail, *newNode, *temporaryNode, *currentNode;
 
 int main () {
-  std::cout << "\nCreate single node" << std::endl;
+  std::cout << "\n\nCreate single node" << std::endl;
   createSingleNode("Rei");
   printAllNode();
   
-  std::cout << "\nCreate First node" << std::endl;
-  createSingleNode("Schwartz");
+  std::cout << "\n\nCreate First node" << std::endl;
+  createFirstNode("Schwartz");
+  printAllNode();
+
+  std::cout << "\n\nCreate Last node" << std::endl;
+  createLastNode("Kazuto");
+  printAllNode();
+
+  std::cout << "\n\nDelete First node" << std::endl;
+  deleteFirstNode();
+  printAllNode();
+
+  std::cout << "\n\nDelete Last node" << std::endl;
+  deleteLastNode();
   printAllNode();
 
   std::cout << "\n";
@@ -37,7 +53,7 @@ void createSingleNode (std::string name) {
   tail = head;
 }
 
-void createFristNode (std::string name) {
+void createFirstNode (std::string name) {
   newNode = new Node();
   newNode->name = name;
 
@@ -45,6 +61,31 @@ void createFristNode (std::string name) {
   newNode->prev = NULL;
   head->prev = newNode;
   head = newNode;
+}
+
+void createLastNode (std::string name) {
+  newNode = new Node();
+  newNode->name = name;
+
+  newNode->next = NULL;
+  newNode->prev = tail;
+  
+  tail->next = newNode;
+  tail = newNode;
+}
+
+void deleteFirstNode () {
+  temporaryNode = head;
+  head = head->next;
+  head->prev = NULL;
+  delete temporaryNode;
+}
+
+void deleteLastNode () {
+  temporaryNode = tail;
+  tail = tail->prev;
+  tail->next = NULL;
+  delete temporaryNode;
 }
 
 void printAllNode () {
