@@ -13,4 +13,13 @@ urutan linear.
 struktur data yang mengatur elemen data
 dalam urutan linear, di mana setiap elemen (node) memiliki data
 dan tautan ke node berikutnya. Anda hanya dapat melintasi
-dari awal ke akhir. 
+dari awal ke akhir.
+
+### B. Double Linked List
+
+struktur data linear yang terdiri dari simpul-simpul yang terhubung
+satu sama lain dengan dua pointer, yaitu pointer ke simpul sebelumnya
+dan pointer ke simpul berikutnya. Ini memungkinkan untuk traversal
+maju dan mundur dengan mudah, membuatnya efisien untuk operasi
+penyisipan dan penghapusan elemen di berbagai posisi dalam
+list.
