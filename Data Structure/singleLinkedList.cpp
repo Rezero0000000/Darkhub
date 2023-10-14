@@ -24,7 +24,7 @@ void printAllNode();
 Node *head, *tail, *currentNode, *newNode, *temporaryNode, *beforeNode; 
 
 int main () {
-  std::cout << "\nCreate single node" << std::endl;
+  std::cout << "\n\nCreate single node" << std::endl;
   createSingleNode("Rei");
   printAllNode();
 
