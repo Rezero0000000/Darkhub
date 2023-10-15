@@ -46,116 +46,56 @@ echo $output;
 ```
 
 ### Path Transerval
+adalah serangan keamanan yang  mencoba mengakses file atau direktori di luar batasan yang
+seharusnya diizinkan. Penyerang melakukan ini dengan memanipulasi path file. 
+Jika aplikasi tidak memvalidasi input dengan benar, serangan ini dapat berhasil. 
 
-Path traversal, juga dikenal sebagai directory traversal atau dot dot slash (..) attack, 
-adalah jenis serangan keamanan komputer yang terjadi ketika seorang penyerang mencoba
-mengakses file atau direktori di luar batasan yang seharusnya diizinkan oleh aplikasi
-web atau perangkat lunak tertentu. Serangan ini biasanya dilakukan dengan memanfaatkan
-celah keamanan yang ada dalam aplikasi web yang tidak memvalidasi dengan benar input
-dari pengguna.
+Contoh: 
+mengakses file dengan mengubah path melalui URL, seperti mengakses `/etc/passwd`
+dengan `../../../../../etc/passwd`. 
 
-Cara kerja serangan path traversal adalah dengan mencoba mengganti atau memanipulasi
-path file atau direktori yang diminta oleh aplikasi sehingga penyerang dapat mengakses
-file atau direktori yang seharusnya tidak dapat diakses olehnya. Ini dapat menyebabkan
-kebocoran informasi sensitif atau bahkan memungkinkan penyerang untuk mengunggah file
-berbahaya ke server.
+1. `/etc/shadow`: File ini berisi informasi kata sandi terenkripsi (hash) pengguna pada sistem Unix-like.
 
-Contoh sederhana serangan path traversal adalah ketika seorang penyerang mencoba
-mengakses file berikut melalui URL:
+2. `/etc/`: Direktori `/etc/` direktori konfigurasi sistem yang mungkin berisi file-file sensitif atau konfigurasi.
 
-```
-https://example.com/viewfile.php?file=../../../../../etc/passwd
-```
+3. `/var/www/`: direktori yang sering digunakan dalam pengembangan web. 
 
-Dalam contoh ini, penyerang mencoba naik beberapa tingkat direktori
-(ditunjukkan oleh `../../`) untuk mengakses file `/etc/passwd` yang seharusnya
-tidak dapat diakses oleh pengguna biasa. Jika aplikasi web tidak memvalidasi
-input dengan benar, serangan ini dapat berhasil.
-
-. `/etc/passwd`: Sebagaimana disebutkan sebelumnya, ini adalah file yang berisi informasi pengguna di sistem Unix-like.
-
-2. `/etc/shadow`: File ini berisi informasi kata sandi terenkripsi (hash) pengguna pada sistem Unix-like. Ini adalah target yang lebih berbahaya, karena penyerang dapat mencoba mendekripsi atau mengecrack kata sandi.
-
-3. `/etc/`: Direktori `/etc/` adalah direktori konfigurasi sistem yang mungkin berisi file-file sensitif atau konfigurasi.
-
-4. `/var/www/`: Ini adalah direktori yang sering digunakan dalam pengembangan web. Jika sistem tidak terkonfigurasi dengan baik, penyerang dapat mencoba mengakses direktori ini untuk mencuri file-file penting dalam aplikasi web.
-
-5. `/usr/local/`: Direktori ini berisi berbagai file aplikasi dan pustaka yang mungkin menjadi target serangan jika aplikasi tidak mengimplementasikan perlindungan yang memadai.
-### Remote Code Execution (RCE)
-
-**Remote Code Execution (RCE)** adalah serangan keamanan yang memungkinkan seorang
-penyerang untuk menjalankan kode atau perintah pada sistem yang diserang dari jarak jauh.
-Serangan ini terjadi ketika penyerang berhasil memanfaatkan kerentanan atau celah
-keamanan dalam suatu perangkat lunak atau sistem untuk memasukkan kode berbahaya
-dan menjalankannya.
-
-Cara kerja serangan RCE adalah sebagai berikut:
-
-1. **Identifikasi Kerentanan**: Penyerang mencari kerentanan atau celah keamanan
-dalam perangkat lunak atau sistem yang menjadi target. Kerentanan ini bisa berupa
-bug perangkat lunak, celah keamanan yang tidak diperbaiki, atau masalah dalam
-konfigurasi yang buruk.
-
-2. **Eksploitasi**: Setelah menemukan kerentanan, penyerang akan mencoba
-memanfaatkannya dengan cara mengirimkan input yang dirancang khusus untuk
-mengeksploitasi kerentanan tersebut. Input ini mungkin berisi kode berbahaya
-yang ingin dijalankan oleh penyerang.
-
-3. **Eksekusi Kode**: Jika eksploitasi berhasil, perangkat lunak atau sistem yang
-diserang akan menjalankan kode berbahaya yang dimasukkan oleh penyerang. Kode ini
-dapat digunakan untuk berbagai tujuan, seperti mengambil alih kendali sistem, mencuri
-data sensitif, atau melakukan tindakan merusak lainnya.
-
-4. **Kendali Jarak Jauh**: Yang membuat RCE berbeda dari serangan lain
-adalah bahwa penyerang dapat menjalankan kode ini dari jarak jauh, biasanya
-melalui jaringan atau internet. Ini berarti penyerang tidak perlu memiliki
-akses fisik ke sistem yang diserang, yang dapat membuat serangan ini lebih berbahaya.
-
+4. `/usr/local/`: berisi berbagai file aplikasi dan pustaka yang mungkin menjadi target serangan.
 
 ### Access Control Vulnerabilities
-Ini adalah jenis kerentanan keamanan yang terjadi ketika sistem atau aplikasi tidak
+jenis kerentanan keamanan yang terjadi ketika sistem atau aplikasi tidak
 secara tepat mengontrol atau mengelola akses ke sumber daya atau fungsionalitas tertentu.
 access controll itu adalah sebuah halaman yang mengatur berbagai hal dalam sistem seperti 
 sistem crud dalam data user.
 
 #### "Unprotected functionality"
-atau "Fungsi yang Tidak Dilindungi" adalah kerentanan dalam
-pengendalian akses yang muncul ketika sebuah aplikasi tidak menerapkan perlindungan untuk
+adalah kerentanan yang muncul ketika sebuah aplikasi tidak menerapkan perlindungan untuk
 fungsi yang sensitif. Sebagai contoh, fungsi administratif mungkin terhubung dari halaman
-selamat datang administrator tetapi tidak dari halaman selamat datang pengguna biasa
-. Namun, seorang pengguna biasa mungkin dapat mengakses fungsi administratif dengan
+selamat datang administrator tetapi tidak dari halaman selamat datang pengguna biasa.
+Namun, seorang pengguna biasa mungkin dapat mengakses fungsi administratif dengan
 menelusuri URL admin yang relevan.
 
-Sebagai contoh, sebuah situs web mungkin menyediakan fungsi sensitif di URL berikut:
+contoh
 
 https://situs-web-tidak-aman.com/admin
-URL ini mungkin dapat diakses oleh semua pengguna, bukan hanya oleh pengguna
-administratif yang memiliki tautan ke fungsi tersebut dalam antarmuka pengguna
-mereka. Dalam beberapa kasus, URL administratif mungkin diungkapkan di
-lokasi lain, seperti dalam file robots.txt:
+URL ini mungkin dapat diakses oleh semua pengguna
 
 https://situs-web-tidak-aman.com/robots.txt
-Meskipun URL tersebut tidak diungkapkan di mana pun, seorang penyerang mungkin dapat
-menggunakan daftar kata untuk mencoba berulang-ulang mencari lokasi fungsi yang
-sensitif tersebut.
 
+Dalam beberapa kasus, URL administratif mungkin diungkapkan di
+lokasi lain, seperti dalam file robots.txt.
 Ini adalah kerentanan yang memungkinkan pengguna untuk mengakses fungsi atau
-data yang seharusnya tidak dapat diakses oleh mereka, dan ini adalah contoh pelanggaran
-pengendalian akses yang serius dalam sistem atau aplikasi. Oleh karena itu, penting untuk
-mengidentifikasi dan mengatasi kerentanan ini untuk menjaga keamanan aplikasi
-dan data yang sensitif.
+data yang seharusnya tidak dapat diakses oleh mereka.
 
 Dalam beberapa kasus, fungsi yang sensitif disembunyikan dengan memberikan URL yang kurang
-dapat ditebak. Ini adalah contoh dari apa yang disebut "keamanan dengan obskuritas." 
-Namun, menyembunyikan fungsi yang sensitif tidak memberikan pengendalian akses yang 
-efektif karena pengguna mungkin menemukan URL yang disamarkan tersebut dengan berbagai cara.
+dapat ditebak. 
 
 Bayangkan sebuah aplikasi yang menyediakan fungsi administratif pada URL berikut:
 
 https://situs-web-tidak-aman.com/administrator-panel-yb556
+
 URL ini mungkin tidak langsung dapat ditebak oleh seorang penyerang. Namun, aplikasi 
-tersebut mungkin tetap mengungkapkan URL kepada pengguna. URL ini mungkin diungkapkan 
-dalam kode JavaScript yang membangun antarmuka pengguna berdasarkan peran pengguna:
+tersebut mungkin tetap mengungkapkan URL . URL ini mungkin diungkapkan dalam kode JavaScript:
 
     <script>
 	    var isAdmin = false;
@@ -167,6 +107,7 @@ dalam kode JavaScript yang membangun antarmuka pengguna berdasarkan peran penggu
 		    ...
 	    }
     </script>
+
 Script ini menambahkan tautan ke antarmuka pengguna pengguna jika mereka adalah
 pengguna admin. Namun, skrip yang berisi URL tersebut terlihat oleh semua pengguna, tanpa
 memandang peran mereka.
@@ -175,30 +116,137 @@ Metode pengendalian akses berbasis parameter adalah pendekatan yang digunakan ol
 aplikasi untuk menentukan hak akses atau peran pengguna saat login, dan kemudian menyimpan
 informasi ini di lokasi yang dapat dikontrol oleh pengguna. Lokasi tersebut dapat berupa:
 
+### Parameter-based access control methods
 
-1. **Hidden Field (Bidang Tersembunyi):** Informasi hak akses atau peran pengguna disimpan
-dalam bidang HTML yang tersembunyi dalam formulir.
+1. **Hidden Field:** 
+2. **Cookie:** 
+3. **Preset Query String Parameter**
 
-2. **Cookie:** Informasi hak akses atau peran pengguna disimpan dalam cookie yang diterima
-oleh browser pengguna.
-
-3. **Preset Query String Parameter (Parameter Query String Tersebut):** Informasi hak akses
-atau peran pengguna disertakan dalam URL sebagai parameter query string.
-
-Aplikasi kemudian membuat keputusan pengendalian akses berdasarkan nilai yang dikirimkan. Misalnya:
+Contohnya :
 
 https://situs-web-tidak-aman.com/login/home.jsp?admin=true
 https://situs-web-tidak-aman.com/login/home.jsp?role=1
 
-Pendekatan ini merupakan kerentanan dalam pengendalian akses karena seorang pengguna dapat
-memodifikasi nilai yang dikirimkan dan mengakses fungsionalitas yang seharusnya tidak mereka
-izinkan, seperti fungsi administratif. Misalnya, seorang pengguna yang tidak memiliki
-hak akses admin seharusnya tidak dapat mengakses fungsi admin, tetapi dengan mengubah
-parameter menjadi "admin=true" atau "role=1", mereka dapat dengan mudah mengakses
-fungsionalitas tersebut.
+seorang pengguna yang tidak memilikihak akses admin seharusnya tidak dapat mengakses
+fungsi admin, tetapi dengan mengubah parameter menjadi "admin=true" atau "role=1",
+mereka dapat dengan mudah mengakses fungsionalitas tersebut.
 
-Ini adalah contoh kerentanan yang serius karena pengguna yang tidak sah dapat memanipulasi
-informasi hak akses dan mendapatkan akses yang tidak semestinya. Oleh karena itu, metode
-pengendalian akses yang lebih kuat, seperti autentikasi yang kuat dan kontrol akses yang
-sesuai, perlu diterapkan untuk melindungi fungsionalitas yang sensitif dalam aplikasi.
+### Horizontal Privilege Escalation (Eskalasi Hak Akses Horizontal) 
+adalah jenis kerentanan dalam pengendalian akses yang terjadi ketika seorang pengguna
+mencoba mendapatkan akses yang seharusnya tidak dimilikinya ke akun pengguna lain yang
+memiliki tingkat izin yang sama. Dalam kata lain, pengguna mencoba "mengambil alih"
+atau "mengeksploitasi" akun pengguna lain dengan hak akses yang setara.
 
+Contoh sederhana dari eskalasi hak akses horizontal adalah sebagai berikut:
+
+Misalkan ada sebuah aplikasi web yang memungkinkan pengguna untuk melihat dan mengedit
+profil pengguna lain. Masing-masing pengguna memiliki akun yang mereka bisa akses dengan
+hak akses penuh untuk profil mereka sendiri. Namun, ada kekurangan dalam aplikasi yang
+memungkinkan pengguna A untuk memodifikasi URL atau parameter permintaan sehingga mereka
+dapat mengakses dan mengedit profil pengguna B.
+
+Ini adalah contoh eskalasi hak akses horizontal karena pengguna A dengan hak akses
+terbatas seharusnya tidak dapat mengedit profil pengguna B. Mereka memanfaatkan kerentanan
+dalam aplikasi untuk mendapatkan akses yang seharusnya tidak mereka miliki.
+
+Untuk menghindari kerentanan eskalasi hak akses horizontal, penting untuk menerapkan kontrol
+akses yang kuat dan memverifikasi izin pengguna dengan cermat, memastikan bahwa setiap pengguna
+hanya dapat mengakses dan memodifikasi informasi yang seharusnya mereka akses sesuai dengan
+peran atau izin mereka dalam sistem atau aplikasi.
+
+Example: 
+Find a blog post by carlos.
+Click on carlos and observe that the URL contains his user ID. Make a note of this ID.
+Log in using the supplied credentials and access your account page.
+Change the "id" parameter to the saved user ID.
+Retrieve and submit the API key.
+
+Horizontal to Vertical Privilege Escalation adalah jenis serangan yang terjadi ketika
+seorang penyerang yang telah sukses melakukan eskalasi hak akses horizontal, yaitu mendapatkan
+akses ke akun pengguna lain dengan tingkat izin yang sama, kemudian memanfaatkan akses ini untuk
+mencapai tingkat izin yang lebih tinggi dalam sistem. Ini dapat terjadi ketika penyerang mengambil
+alih akun yang lebih tinggi hak aksesnya, seperti akun administrator.
+
+Contoh dari serangan ini adalah sebagai berikut:
+
+1. **Horizontal Privilege Escalation:** Seorang penyerang awalnya berhasil mendapatkan
+akses ke akun pengguna lain, misalnya dengan memanipulasi parameter URL seperti yang
+telah dijelaskan sebelumnya.
+
+2. **Compromising Administrative Account:** Setelah mendapatkan akses ke akun pengguna
+lain, jika akun yang disasarnya adalah akun administrator atau memiliki hak akses yang
+tinggi, penyerang akan mencoba untuk mengambil alih akun ini. Ini bisa dilakukan dengan
+mencari kelemahan dalam akun administrator, mengganti kata sandi, atau menggunakan
+berbagai metode lainnya.
+
+3. **Vertical Privilege Escalation:** Setelah mengambil alih akun administrator, penyerang
+sekarang memiliki hak akses yang tinggi dan dapat melakukan tindakan dengan tingkat izin
+yang lebih tinggi, termasuk mengakses fungsionalitas yang hanya tersedia untuk
+administrator, mengendalikan seluruh sistem, atau mengakses data sensitif.
+
+Serangan seperti ini memanfaatkan kerentanan dalam pengendalian akses dan kelemahan dalam
+aplikasi untuk mendapatkan akses yang lebih tinggi dalam sistem. Untuk menghindari serangan
+horizontal to vertical privilege escalation, penting untuk mengamankan semua akun pengguna, terutama
+akun yang memiliki tingkat izin tinggi, dan menerapkan praktik keamanan yang ketat untuk mencegah
+penyerang mengambil alih akun ini.
+
+### Authentication Vulnerabilities
+
+Serangan Brute-Force: Ini adalah jenis serangan di mana penyerang menggunakan sistem
+percobaan dan kesalahan untuk menebak kredensial pengguna yang sah. Serangan ini umumnya
+otomatis dan menggunakan daftar kata (wordlists) yang berisi kombinasi potensial dari nama
+pengguna (username) dan kata sandi (password). Dengan otomatisasi, terutama menggunakan
+alat khusus, penyerang dapat melakukan sejumlah besar upaya login dalam waktu singkat.
+
+Serangan brute-force tidak selalu berarti menebak sepenuhnya secara acak nama pengguna dan
+kata sandi. Penyerang juga dapat menggunakan logika dasar atau pengetahuan yang tersedia
+publik untuk memperbaiki serangan brute-force mereka dan membuat tebakan yang lebih terarah.
+Hal ini secara signifikan meningkatkan efisiensi serangan tersebut.
+
+Contohnya, penyerang mungkin mengetahui bahwa banyak orang menggunakan kata sandi yang
+mudah ditebak, seperti "password123". Dengan informasi ini, mereka dapat mencoba kata sandi 
+tersebut terlebih dahulu sebelum mencoba yang lain. Mereka juga dapat mencoba variasi nama
+pengguna, seperti menggantinya dengan kata "admin" atau "root," yang sering digunakan untuk
+akun administrator.
+
+**Username Enumeration** (Enumerasi Nama Pengguna) adalah ketika seorang penyerang dapat
+mengamati perubahan perilaku situs web untuk mengidentifikasi apakah sebuah nama pengguna
+tertentu adalah benar atau valid.
+
+Username enumeration biasanya terjadi pada halaman login, misalnya ketika Anda memasukkan
+nama pengguna yang valid tetapi kata sandi yang salah, atau pada formulir pendaftaran
+ketika Anda memasukkan nama pengguna yang sudah ada. Hal ini sangat mengurangi waktu dan
+usaha yang diperlukan untuk serangan brute-force karena penyerang dapat dengan cepat
+membuat daftar pendek nama pengguna yang valid.
+
+Saat mencoba untuk brute-force halaman login, perhatikan perbedaan dalam hal berikut:
+
+1. **Kode status (Status codes):** Selama serangan brute-force, kode status HTTP yang
+dikembalikan kemungkinan akan sama untuk sebagian besar tebakan karena sebagian besar dari
+mereka akan salah. Jika sebuah tebakan mengembalikan kode status yang berbeda, ini adalah
+indikasi kuat bahwa nama pengguna tersebut benar. Sebaiknya praktik terbaik bagi situs web
+untuk selalu mengembalikan kode status yang sama terlepas dari hasilnya, tetapi praktik
+ini tidak selalu diikuti.
+
+2. **Pesan kesalahan (Error messages):** Terkadang pesan kesalahan yang dikembalikan
+berbeda tergantung pada apakah baik nama pengguna maupun kata sandi salah atau hanya
+kata sandi yang salah. Praktik terbaik bagi situs web adalah menggunakan pesan generik
+dan identik dalam kedua kasus, tetapi kesalahan pengetikan kecil kadang muncul. Hanya
+dengan satu karakter yang salah membuat dua pesan tersebut berbeda, bahkan dalam kasus
+di mana karakter tersebut tidak terlihat pada halaman yang ditampilkan.
+
+3. **Waktu respons (Response times):** Jika sebagian besar permintaan ditangani dengan
+waktu respons yang mirip, maka permintaan yang berbeda menunjukkan bahwa ada sesuatu
+yang berbeda terjadi di belakang layar. Ini merupakan indikasi lain bahwa nama pengguna
+yang ditebak mungkin benar. Misalnya, sebuah situs web mungkin hanya memeriksa apakah
+kata sandi benar jika nama pengguna valid. Langkah tambahan ini mungkin menyebabkan
+peningkatan waktu respons yang sedikit. Ini mungkin halus, tetapi seorang penyerang
+dapat membuat penundaan ini lebih jelas dengan memasukkan kata sandi yang sangat panjang
+yang membuat situs web membutuhkan waktu yang lebih lama untuk memprosesnya.
+
+
+Username enumeration adalah teknik yang dapat membantu penyerang mempersempit daftar
+potensial nama pengguna yang valid, yang selanjutnya digunakan dalam serangan brute-force
+untuk mencoba kata sandi yang cocok. Untuk melindungi sistem dari serangan semacam ini,
+penting untuk mengimplementasikan perlindungan yang kuat dan menjaga konsistensi dalam
+tanggapan dari situs web terhadap permintaan otentikasi yang salah.
