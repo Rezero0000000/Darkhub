@@ -11,13 +11,15 @@
 void createSingleNode (std::string);
 void createFirstNode (std::string);
 void createLastNode (std::string);
+void createMiddleNode (std::string, int);
 
 void deleteFirstNode ();
 void deleteLastNode ();
+void deleteMiddleNode (int position);
 
 void printAllNode ();
 
-Node *head, *tail, *newNode, *temporaryNode, *currentNode;
+Node *head, *tail, *newNode, *temporaryNode, *currentNode, *beforeNode, *afterNode;
 
 int main () {
   std::cout << "\n\nCreate single node" << std::endl;
@@ -38,6 +40,19 @@ int main () {
 
   std::cout << "\n\nDelete Last node" << std::endl;
   deleteLastNode();
+  printAllNode();
+
+  std::cout << "\n\nUpdate list" << std::endl;
+  createLastNode("Kazuto");
+  createLastNode("Schwartz");
+  printAllNode();
+
+  std::cout << "\n\nCreate Middle node" << std::endl;
+  createMiddleNode("Atomic", 2);
+  printAllNode();
+
+  std::cout << "\n\nDelete Middle node" << std::endl;
+  deleteMiddleNode(2);
   printAllNode();
 
   std::cout << "\n";
@@ -63,6 +78,23 @@ void createFirstNode (std::string name) {
   head = newNode;
 }
 
+void createMiddleNode (std::string name, int position) {
+  int number = 1;
+  currentNode = head;
+  newNode = new Node();
+  newNode->name = name;
+
+  while (number < position-1){
+    currentNode = currentNode->next;
+    number++;
+  }
+  afterNode = currentNode->next;
+  newNode->prev = currentNode;
+  newNode->next = afterNode;
+  currentNode->next = newNode;
+  afterNode->prev = newNode;
+}
+
 void createLastNode (std::string name) {
   newNode = new Node();
   newNode->name = name;
@@ -80,6 +112,22 @@ void deleteFirstNode () {
   head->prev = NULL;
   delete temporaryNode;
 }
+
+void deleteMiddleNode (int position) {
+  int number = 1;
+  currentNode = head;
+  
+  while (number < position - 1) {
+    currentNode = currentNode->next;
+    number++;
+  }
+  
+  temporaryNode = currentNode->next;
+  afterNode = temporaryNode->next;
+  currentNode->next = temporaryNode->next;
+  afterNode->prev = currentNode;
+}
+
 
 void deleteLastNode () {
   temporaryNode = tail;
